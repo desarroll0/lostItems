@@ -13,6 +13,7 @@
       'lostitems.posts',
       'lostitems.utils',
       'lostitems.profiles',
+      'ngFileUpload'
     ]);
 
   angular

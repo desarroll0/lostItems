@@ -7,11 +7,13 @@ from rest_framework.response import Response
 from posts.models import Post
 from posts.permissions import IsAuthorOfPost
 from posts.serializers import PostSerializer
+from rest_framework.parsers import MultiPartParser, FormParser
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
+    parser_classes = (MultiPartParser, FormParser,)
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:
@@ -19,7 +21,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return (permissions.IsAuthenticated(), IsAuthorOfPost(),)
 
     def perform_create(self, serializer):
-        instance = serializer.save(author=self.request.user)
+        instance = serializer.save(author=self.request.user, datafile =self.request.data.get('datafile'))
         return super(PostViewSet, self).perform_create(serializer)
 
 

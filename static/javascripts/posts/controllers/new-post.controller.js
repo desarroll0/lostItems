@@ -9,12 +9,12 @@
     .module('lostitems.posts.controllers')
     .controller('NewPostController', NewPostController);
 
-  NewPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts'];
+  NewPostController.$inject = ['$rootScope', '$scope', 'Authentication', 'Snackbar', 'Posts', 'Upload'];
 
   /**
   * @namespace NewPostController
   */
-  function NewPostController($rootScope, $scope, Authentication, Snackbar, Posts) {
+  function NewPostController($rootScope, $scope, Authentication, Snackbar, Posts, Upload) {
     var vm = this;
 
     vm.submit = submit;
@@ -33,8 +33,21 @@
       });
 
       $scope.closeThisDialog();
-      
-      Posts.create(vm.content).then(createPostSuccessFn, createPostErrorFn);
+
+Upload.upload({
+            url: '/api/v1/posts/',
+            data: {file: vm.datafile, 'content': vm.content}
+        }).then(function (resp) {
+            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+        });
+
+
+      Posts.create(vm.content, vm.datafile).then(createPostSuccessFn, createPostErrorFn);
 
 
       /**
@@ -52,7 +65,8 @@
       */
       function createPostErrorFn(data, status, headers, config) {
         $rootScope.$broadcast('post.created.error');
-        Snackbar.error(data.error);
+        if(data.error)Snackbar.error(data.error);
+        else Snackbar.error("Error inesperado!");
       }
     }
   }

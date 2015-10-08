@@ -9,12 +9,12 @@
     .module('lostitems.posts.controllers')
     .controller('PostsController', PostsController);
 
-  PostsController.$inject = ['$scope'];
+  PostsController.$inject = ['$scope', 'Posts'];
 
   /**
   * @namespace PostsController
   */
-  function PostsController($scope) {
+  function PostsController($scope, Posts) {
     var vm = this;
 
     vm.columns = [];
@@ -114,6 +114,7 @@
           vm.columns[column].push(current[i]);
         }
       }
+      Posts.setColumns(vm.columns);
     }
   }
 })();

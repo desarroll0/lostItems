@@ -7,8 +7,11 @@
               placeholder="Descripción del objeto a registrar" 
               ng-model="vm.content">
     </textarea>
+    <!--
     <input class="form-control"  
-              id="post__image" type="file" ng-model="vm.image">
+              id="post__image" type="file" ng-model="vm.datafile">-->
+    <div class="button" ngf-select ng-model="vm.datafile" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
+    ngf-resize="{width: 100, height: 100}">Seleccionar</div>
   </div>
 
   <div class="form-group">

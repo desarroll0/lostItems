@@ -5,6 +5,6 @@
   ng-dialog-controller="NewPostController as vm"></a>
   <posts posts="vm.posts" ng-show="vm.posts && vm.posts.length"></posts>
  
-  <div class="jumbotron profile__header" ng-hide="vm.columns && vm.columns.length">
+  <div class="jumbotron profile__header" ng-hide="vm.posts && vm.posts.length">
     <h2 class="profile__username"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span> No se encontraron elementos para mostrar!</h2>
   </div>

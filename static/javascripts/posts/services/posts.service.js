@@ -16,10 +16,13 @@
   * @returns {Factory}
   */
   function Posts($http) {
+    var columns;
     var Posts = {
       all: all,
       create: create,
-      get: get
+      get: get,
+      getColumns: getColumns,
+      setColumns: setColumns
     };
 
     return Posts;
@@ -44,10 +47,30 @@
     * @returns {Promise}
     * @memberOf lostitems.posts.services.Posts
     */
-    function create(content) {
-      return $http.post('/api/v1/posts/', {
+    function create(content, datafile) {
+       var fd = new FormData();
+
+       var url = '/api/v1/posts/';
+
+       //angular.forEach(datafile,function(file){
+       fd.append('file',datafile);
+       //});
+
+       //sample data
+       var data ={
         content: content
-      });
+       };
+
+       fd.append("content", content);
+
+
+      return $http.post(url, fd, {
+        withCredentials : false,
+        headers : {
+        'Content-Type' : 'multipart/form-data'
+        },
+        transformRequest : angular.identity
+       });
     }
 
     /**
@@ -59,6 +82,14 @@
      */
     function get(username) {
       return $http.get('/api/v1/accounts/' + username + '/posts/');
+    }
+
+    function getColumns(cols){
+      columns = cols;
+    }
+
+    function setColumns(){
+      return columns;
     }
   }
 })();
