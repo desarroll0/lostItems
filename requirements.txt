@@ -1,3 +1,10 @@
+Pillow requirements:
+sudo apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev \
+    libfreetype6-dev liblcms2-dev libwebp-dev tcl8.5-dev tk8.5-dev python-tk	
+
+
+
+
 Django==1.7.1
 dj-database-url==0.3.0
 dj-static==0.0.6
@@ -9,7 +16,7 @@ gunicorn==19.1.1
 six==1.8.0
 static3==0.5.1
 wsgiref==0.1.2
-
+Pillow
 
 Steps:
 

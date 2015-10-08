@@ -19,6 +19,10 @@
 
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.posts = [];
+    vm.mediaroot = mediaroot;
+
+
+    console.log(vm.mediaroot);
 
     activate();
 
@@ -46,7 +50,9 @@
       function postsSuccessFn(data, status, headers, config) {
         vm.posts = data.data;
         if(vm.posts.length <= 0 )
-        Snackbar.error("No hay objetos para mostrar!");
+          Snackbar.error("No hay objetos para mostrar!");
+        console.log(vm.posts);
+        console.log(mediaroot);
       }
 
 

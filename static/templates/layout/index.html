@@ -1,10 +1,11 @@
-<a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-post"
+<a class="btn btn-primary btn-fab btn-raised mdi-content-add btn-add-new-post btn-above-all"
   href="javascript:void(0)"
   ng-show="vm.isAuthenticated"
   ng-dialog="/static/templates/posts/new-post.html"
   ng-dialog-controller="NewPostController as vm"></a>
-  <posts posts="vm.posts" ng-show="vm.posts && vm.posts.length"></posts>
+
+  <posts posts="vm.posts" mediaroot="vm.mediaroot" ng-show="vm.posts && vm.posts.length"></posts>
  
   <div class="jumbotron profile__header" ng-hide="vm.posts && vm.posts.length">
-    <h2 class="profile__username"><span class="glyphicon glyphicon-pause" aria-hidden="true"></span> No se encontraron elementos para mostrar!</h2>
+    <h2 class="profile__username console_message"><span class="glyphicon glyphicon-console" aria-hidden="true"></span> No se encontraron elementos para mostrar!</h2>
   </div>

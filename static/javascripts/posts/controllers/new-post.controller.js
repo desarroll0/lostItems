@@ -34,20 +34,20 @@
 
       $scope.closeThisDialog();
 
-Upload.upload({
-            url: '/api/v1/posts/',
-            data: {file: vm.datafile, 'content': vm.content}
-        }).then(function (resp) {
-            console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-        }, function (resp) {
-            console.log('Error status: ' + resp.status);
-        }, function (evt) {
-            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-        });
+      Upload.upload({
+                  url: '/api/v1/posts/',
+                  data: {file: vm.datafile, 'content': vm.content}
+              }).then(createPostSuccessFn/*function (resp) {
+                  console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+              }*/,createPostErrorFn/* function (resp) {
+                  console.log('Error status: ' + resp.status);
+              }*/, function (evt) {
+                  var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                  console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+              });
 
 
-      Posts.create(vm.content, vm.datafile).then(createPostSuccessFn, createPostErrorFn);
+      //Posts.create(vm.content, vm.datafile).then(createPostSuccessFn, createPostErrorFn);
 
 
       /**

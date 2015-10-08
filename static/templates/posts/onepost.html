@@ -8,12 +8,14 @@
           </a>
         </div>
         <img src="{{ post.datafile }}" alt="" class="img-circle">
+
         <div class="post__content">
           {{ post.content }}
+        </div>
+        <div class="post__created_at">
+          {{ post.created_at }}
         </div>
       </div>
     </div>
   </div>
 </div>
-
-          {{ post.author.username }}

@@ -21,9 +21,10 @@
     var directive = {
       restrict: 'E',
       scope: {
-        post: '='
+        post: '=',
+        mediaroot: '=',
       },
-      templateUrl: '/static/templates/posts/post.html'
+      templateUrl: '/static/templates/posts/onepost.html'
     };
 
     return directive;

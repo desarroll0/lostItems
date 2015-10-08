@@ -4,6 +4,7 @@ from rest_framework_nested import routers
 from authentication.views import AccountViewSet, LoginView, LogoutView
 from django.contrib import admin
 from posts.views import AccountPostsViewSet, PostViewSet
+from django.conf import settings
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
@@ -26,6 +27,9 @@ urlpatterns = patterns(
 
   	url(r'^api/v1/', include(router.urls)),
   	url(r'^api/v1/', include(accounts_router.urls)),
+
+    #mediafiles
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),
   
     url('^.*$', IndexView.as_view(), name='index'),
     #url('^/*$', IndexView.as_view(), name='index'),

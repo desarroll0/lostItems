@@ -23,7 +23,8 @@
       controllerAs: 'vm',
       restrict: 'E',
       scope: {
-        posts: '='
+        posts: '=',
+        mediaroot: '=',
       },
       templateUrl: '/static/templates/posts/posts.html'
     };

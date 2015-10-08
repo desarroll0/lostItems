@@ -2,7 +2,14 @@
   text-align: center;
 }
 
-.post {}
+.console_message {
+	font-family: "Courier New", Courier,monospace !important;
+    text-align: center;
+}
+
+.btn-above-all{
+	z-index: 1000;
+}
 
 .post .post__meta {
   font-weight: bold;
