@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('thinkster.routes')
+    .module('lostitems.routes')
     .config(config);
 
   config.$inject = ['$routeProvider'];
@@ -20,8 +20,6 @@
       controller: 'LoginController',
       controllerAs: 'vm',
       templateUrl: '/static/templates/authentication/login2.html'
-    }).when('/admin', {
-      templateUrl: '/admin'
     }).when('/', {
       controller: 'IndexController',
       controllerAs: 'vm',

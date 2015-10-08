@@ -12,7 +12,7 @@ import json
 # Create your views here.
 
 class AccountViewSet(viewsets.ModelViewSet):
-    # we will use the username attribute of the Account model to look up accounts instead of the id attribute. Overriding lookup_field handles this for us  : https://thinkster.io/django-angularjs-tutorial/
+    # we will use the username attribute of the Account model to look up accounts instead of the id attribute. Overriding lookup_field handles this for us  : https://lostitems.io/django-angularjs-tutorial/
     lookup_field = 'username'
     queryset = Account.objects.all()
     serializer_class = AccountSerializer
@@ -39,9 +39,7 @@ class AccountViewSet(viewsets.ModelViewSet):
 
 
 class LoginView(views.APIView):
-    print("000000000")
     def post(self, request, format=None):
-        print("1111111")
         data = json.loads((request.body).decode('utf-8')) #json.loads(request.body)
         #data = json.loads('{"email":"ok@ok.com","password":"ok"}')
         email = data.get('email', None)

@@ -1,7 +1,6 @@
 {
-  "name": "thinkster_django_angular_boilerplate",
+  "name": "lostitems_django_angular_boilerplate",
   "version": "0.0.0",
-  "homepage": "https://github.com/brwr/thinkster-django-angular-boilerplate",
   "license": "MIT",
   "ignore": [
     "**/.*",

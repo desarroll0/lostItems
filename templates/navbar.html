@@ -14,11 +14,11 @@
       <ul class="nav navbar-nav pull-right">
         {% if user.is_authenticated %}
           <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
-          <li><a href="/+{{ user.username }}/settings">Settings</a></li>
-          <li><a href="javascript:void(0)" ng-click="vm.logout()">Logout</a></li>
+          <li><a href="/+{{ user.username }}/settings">Opciones</a></li>
+          <li><a href="/register">Registrar</a></li>
+          <li><a href="javascript:void(0)" ng-click="vm.logout()">Salir</a></li>
         {% else %}
-          <li><a href="/login">Login</a></li>
-          <li><a href="/register">Register</a></li>
+          <li><a href="/login">Ingrsar</a></li>
         {% endif %}
       </ul>
     </div> <!-- /.collapse.navbar-collapse -->

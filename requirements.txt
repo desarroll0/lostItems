@@ -9,3 +9,14 @@ gunicorn==19.1.1
 six==1.8.0
 static3==0.5.1
 wsgiref==0.1.2
+
+
+Steps:
+
+1. Deploy the app
+2. Create user: 
+	2.1 python manage.py create superuser
+	2.2 type email
+	2.3 type username
+	2.4 type password
+3.

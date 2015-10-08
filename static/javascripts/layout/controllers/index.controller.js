@@ -1,12 +1,12 @@
 /**
 * IndexController
-* @namespace thinkster.layout.controllers
+* @namespace lostitems.layout.controllers
 */
 (function () {
   'use strict';
 
   angular
-    .module('thinkster.layout.controllers')
+    .module('lostitems.layout.controllers')
     .controller('IndexController', IndexController);
 
   IndexController.$inject = ['$scope', 'Authentication', 'Posts', 'Snackbar'];
@@ -25,7 +25,7 @@
     /**
     * @name activate
     * @desc Actions to be performed when this controller is instantiated
-    * @memberOf thinkster.layout.controllers.IndexController
+    * @memberOf lostitems.layout.controllers.IndexController
     */
     function activate() {
       Posts.all().then(postsSuccessFn, postsErrorFn);

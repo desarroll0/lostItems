@@ -1,5 +1,5 @@
 """
-WSGI config for thinkster_django_angular_boilerplate project.
+WSGI config for lostitems_django_angular_boilerplate project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 

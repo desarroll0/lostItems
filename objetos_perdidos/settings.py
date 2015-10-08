@@ -1,5 +1,5 @@
 """
-Django settings for thinkster_django_angular_boilerplate project.
+Django settings for lostitems_django_angular_boilerplate project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.7/topics/settings/

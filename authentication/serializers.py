@@ -30,7 +30,7 @@ class AccountSerializer(serializers.ModelSerializer):
 			if password and confirm_password and password == confirm_password:
 				instance.set_password(password)
 				instance.save()
-			'''When a user's password is updated, their session authentication hash must be explicitly updated. If we don't do this here, the user will not be authenticated on their next request and will have to log in again.  https://thinkster.io/django-angularjs-tutorial/'''
+			'''When a user's password is updated, their session authentication hash must be explicitly updated. If we don't do this here, the user will not be authenticated on their next request and will have to log in again.  https://lostitems.io/django-angularjs-tutorial/'''
 			update_session_auth_hash(self.context.get('request'), instance)
 
 			return instance

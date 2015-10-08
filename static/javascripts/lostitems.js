@@ -1,30 +1,30 @@
 //angular
-//  .module('thinkster', []);
+//  .module('lostitems', []);
 
 (function () {
   'use strict';
 
   angular
-    .module('thinkster', [
-      'thinkster.config',
-      'thinkster.routes',
-      'thinkster.authentication',
-      'thinkster.layout',
-      'thinkster.posts',
-      'thinkster.utils',
-      'thinkster.profiles',
+    .module('lostitems', [
+      'lostitems.config',
+      'lostitems.routes',
+      'lostitems.authentication',
+      'lostitems.layout',
+      'lostitems.posts',
+      'lostitems.utils',
+      'lostitems.profiles',
     ]);
 
   angular
-    .module('thinkster.routes', ['ngRoute']);
+    .module('lostitems.routes', ['ngRoute']);
 
   angular
-    .module('thinkster.config', []);
+    .module('lostitems.config', []);
 
 
 
     angular
-  .module('thinkster')
+  .module('lostitems')
   .run(run);
 
   run.$inject = ['$http'];
