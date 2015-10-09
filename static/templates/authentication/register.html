@@ -3,24 +3,36 @@
     <h1>Registrar Usuario</h1>
 
     <div class="well">
-      <form role="form" ng-submit="vm.register()">
+      <form role="form" ng-submit="vm.register(registform)" name="registform" novalidate>
         <div class="form-group">
           <label for="register__email">Email</label>
-          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="correo@ejemplo.com" />
+          <input type="email" class="form-control" id="register__email" ng-model="vm.email" placeholder="correo@ejemplo.com" name="email" required />
+          <span class="label label-warning" ng-show="registform.email.$dirty && registform.email.$invalid">
+            <span ng-show="registform.email.$error.required">Email es requerido.</span>
+            <span ng-show="registform.email.$error.email">Email es inválido (Ejemplo: correo@ejemplo.com).</span>
+          </span>
         </div>
 
         <div class="form-group">
           <label for="register__username">Usuario</label>
-          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="NombreDeUsuario" />
+          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="NombreDeUsuario" name="username" ng-minlength="4" ng-maxlength="20" required />
+          <span class="label label-warning" ng-show="registform.username.$dirty && registform.username.$invalid">
+            <span ng-show="registform.username.$error.required">Usuario es requerido.</span>
+            <span ng-show="registform.username.$error.minlength">Usuario de mínimo 4 caracteres.</span>
+            <span ng-show="registform.username.$error.maxlength">Usuario de máximo 20 caracteres.</span>
+          </span>
         </div>
 
         <div class="form-group">
-          <label for="register__password">Contraseña</label>
-          <input type="password" class="form-control" id="register__password" ng-model="vm.password" placeholder="********" />
+          <label for="register__password" required>Contraseña</label>
+          <input type="password" class="form-control" name="contrasena" id="register__password" ng-model="vm.password" required placeholder="********" />
+          <span class="label label-warning" ng-show="registform.contrasena.$dirty && registform.contrasena.$invalid">
+            <span ng-show="registform.contrasena.$error.required">Contraseña es requerida.</span>
+          </span>
         </div>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary">Enviar</button>
+          <button type="submit" ng-disabled="registform.$invalid" class="btn btn-primary">Enviar</button>
         </div>
       </form>
     </div>

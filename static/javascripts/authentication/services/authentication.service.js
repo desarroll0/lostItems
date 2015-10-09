@@ -49,23 +49,7 @@
         username: username,
         password: password,
         email: email
-      }).then(registerSuccessFn, registerErrorFn);  
-      /**
-      * @name registerSuccessFn
-      * @desc Log the new user in
-      */
-      function registerSuccessFn(resp, status, headers, config) {
-        Snackbar.show("Creado "+username+" ( "+email+" ) Exitosamente! ");
-      }
-      /**
-      * @name registerErrorFn
-      * @desc Log "Epic failure!" to the console
-      */
-      function registerErrorFn(resp, status, headers, config) {
-        if(resp.data.message)Snackbar.error(resp.data.message);
-        if(resp.data.detail)Snackbar.error(resp.data.detail);
-        console.error('Epic failure!');
-      }
+      });
     }
     /**
      * @name login
