@@ -19,6 +19,11 @@
 
     vm.isAuthenticated = Authentication.isAuthenticated();
     vm.posts = [];
+<<<<<<< HEAD
+=======
+    vm.mediaroot = mediaroot;
+
+>>>>>>> ba327165c30a1be59812004534f58b35d11c04ef
 
     activate();
 
