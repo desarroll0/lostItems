@@ -29,11 +29,9 @@
       Upload.upload({
                   url: '/api/v1/posts/',
                   data: {file: vm.datafile, 'content': vm.content}
-              }).then(createPostSuccessFn/*function (resp) {
-                  console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
-              }*/,createPostErrorFn/* function (resp) {
-                  console.log('Error status: ' + resp.status);
-              }*/, function (evt) {
+              }).then(createPostSuccessFn
+              ,createPostErrorFn
+              , function (evt) {
                   var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
                   console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
               });
@@ -47,9 +45,11 @@
       * @desc Show snackbar with success message
       */
       function createPostSuccessFn(data, status, headers, config) {
-
+        //Hack: The url file is returning with the "/api/v1/posts/" string wrongly. Issue with the django rest framework
+        var datafile =  data.data.datafile.replace(data.config.url, "/");
       $rootScope.$broadcast('post.created', {
         content: vm.content,
+        datafile: datafile,
         author: {
           username: Authentication.getAuthenticatedAccount().username
         }
@@ -68,6 +68,7 @@
       function createPostErrorFn(data, status, headers, config) {
       $rootScope.$broadcast('post.created', {
         content: vm.content,
+        datafile: vm.datafile,
         author: {
           username: Authentication.getAuthenticatedAccount().username
         }
