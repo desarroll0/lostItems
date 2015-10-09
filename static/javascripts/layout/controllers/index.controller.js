@@ -22,8 +22,6 @@
     vm.mediaroot = mediaroot;
 
 
-    console.log(vm.mediaroot);
-
     activate();
 
     /**
@@ -52,7 +50,6 @@
         if(vm.posts.length <= 0 )
           Snackbar.error("No hay objetos para mostrar!");
         console.log(vm.posts);
-        console.log(mediaroot);
       }
 
 

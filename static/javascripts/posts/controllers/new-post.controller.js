@@ -25,15 +25,10 @@
     * @memberOf lostitems.posts.controllers.NewPostController
     */
     function submit() {
-      $rootScope.$broadcast('post.created', {
-        content: vm.content,
-        author: {
-          username: Authentication.getAuthenticatedAccount().username
-        }
-      });
+
 
       $scope.closeThisDialog();
-
+      
       Upload.upload({
                   url: '/api/v1/posts/',
                   data: {file: vm.datafile, 'content': vm.content}
@@ -55,6 +50,15 @@
       * @desc Show snackbar with success message
       */
       function createPostSuccessFn(data, status, headers, config) {
+        console.log(data.data);
+        $rootScope.$broadcast('post.created', {
+          content: vm.content,
+          datafile: data.data.datafile,
+          author: {
+            username: Authentication.getAuthenticatedAccount().username
+          }
+        });
+
         Snackbar.show('Success! Post created.');
       }
 
