@@ -28,7 +28,7 @@
      * @memberOf lostitems.authentication.controllers.RegisterController
      */
     function activate() {
-      // If the user is authenticated, they should not be here.
+      // If the user is not authenticated, they should not be here.
       if (!Authentication.isAuthenticated()) {
         $location.url('/');
       }

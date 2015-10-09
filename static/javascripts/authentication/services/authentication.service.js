@@ -54,15 +54,16 @@
       * @name registerSuccessFn
       * @desc Log the new user in
       */
-      function registerSuccessFn(data, status, headers, config) {
-        Authentication.login(email, password);
+      function registerSuccessFn(resp, status, headers, config) {
+        Snackbar.show("Creado "+username+" ( "+email+" ) Exitosamente! ");
       }
       /**
       * @name registerErrorFn
       * @desc Log "Epic failure!" to the console
       */
-      function registerErrorFn(data, status, headers, config) {
-        Snackbar.error(data.message);
+      function registerErrorFn(resp, status, headers, config) {
+        if(resp.data.message)Snackbar.error(resp.data.message);
+        if(resp.data.detail)Snackbar.error(resp.data.detail);
         console.error('Epic failure!');
       }
     }

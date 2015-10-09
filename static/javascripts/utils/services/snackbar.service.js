@@ -33,7 +33,7 @@
     * @param {Object} options Options for displaying the snackbar
     */
     function _snackbar(content, options) {
-      options = _.extend({ timeout: 3000 }, options);
+      options = _.extend({ timeout: 6000 }, options);
       options.content = content;
 
       $.snackbar(options);

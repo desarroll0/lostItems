@@ -1,4 +1,4 @@
-<form role="form" ng-submit="vm.submit()">
+<form role="form" name="itemform"  novalidate>
   <div class="form-group">
     <label for="post__content">Nuevo Objeto Perdido</label>
     <textarea class="form-control" 
@@ -10,13 +10,20 @@
     <!--
     <input class="form-control"  
               id="post__image" type="file" ng-model="vm.datafile">-->
-    <div class="btn btn-default " ngf-select ng-model="vm.datafile" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" ngf-min-height="100" 
-    ngf-resize="{width: 100, height: 100}"><span class="glyphicon glyphicon-upload" aria-hidden="true"></span> Seleccionar Archivo</div>
+    <div class="btn btn-default " ngf-select="" ng-model="vm.datafile" name="datafile" ngf-pattern="'image/*'" accept="image/*" 
+    ngf-max-size="1MB" ngf-resize="{width: 100, height: 100}" >
+    <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 
+    Seleccionar Archivo</div>
+    <div ng-repeat="err in itemform.datafile.$ngfValidations">
+        <i ng-show="err.valid==false && err.name == 'maxSize'">Archivo demasiado grande, max 1MB</i>
+        <i ng-show="err.valid==false && err.name == 'pattern'">Por favor seleccione una imágen</i>
+    </div>
   </div>
 
   <div class="form-group">
-    <button type="submit" class="btn btn-primary">
+    <button type="submit" ng-click="vm.submit(itemform)" class="btn btn-primary">
       Enviar
     </button>
+
   </div>
 </form>

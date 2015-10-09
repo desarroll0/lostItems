@@ -24,18 +24,26 @@
     * @desc Create a new Post
     * @memberOf lostitems.posts.controllers.NewPostController
     */
-    function submit() {
+    function submit(itemform) {
+        console.log(vm.datafile);
+      if (itemform.$valid && vm.datafile ) {
+        console.log('Validado correctamente');
+      }
+      else{ 
+        console.log(itemform.datafile);
+        return;
+      }
+
       $scope.closeThisDialog();
       
       Upload.upload({
-                  url: '/api/v1/posts/',
-                  data: {file: vm.datafile, 'content': vm.content}
-              }).then(createPostSuccessFn
-              ,createPostErrorFn
-              , function (evt) {
-                  var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                  console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-              });
+                url: '/api/v1/posts/',
+                data: {file: vm.datafile, 'content': vm.content}
+            }).then(createPostSuccessFn,createPostErrorFn, 
+            function (evt) {
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            });
 
 
       //Posts.create(vm.content, vm.datafile).then(createPostSuccessFn, createPostErrorFn);
@@ -48,16 +56,16 @@
       function createPostSuccessFn(data, status, headers, config) {
         //Hack: The url file is returning with the "/api/v1/posts/" string wrongly. Issue with the django rest framework
         var datafile =  data.data.datafile.replace(data.config.url, "/");
-      $rootScope.$broadcast('post.created', {
-        content: vm.content,
-        datafile: datafile,
-        author: {
-          username: Authentication.getAuthenticatedAccount().username
-        }
-      });
+        $rootScope.$broadcast('post.created', {
+          content: vm.content,
+          datafile: datafile,
+          author: {
+            username: Authentication.getAuthenticatedAccount().username
+          }
+        });
 
-      $scope.closeThisDialog();
-        Snackbar.show('Success! Post created.');
+        $scope.closeThisDialog();
+        Snackbar.show('El objeto se ha registrado correctamente.');
       }
 
 
