@@ -43,12 +43,14 @@
     * @returns {Promise}
     * @memberOf lostitems.authentication.services.Authentication
     */
-    function register(email, password, username) {
+    function register(email, password, username, first_name, last_name) {
       //return $http.get('/api/v1/accounts/', {
         return $http.post('/api/v1/accounts/', {
         username: username,
         password: password,
-        email: email
+        email: email,
+        first_name: first_name,
+        last_name: last_name
       });
     }
     /**

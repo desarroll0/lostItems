@@ -15,11 +15,31 @@
 
         <div class="form-group">
           <label for="register__username">Usuario</label>
-          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="NombreDeUsuario" name="username" ng-minlength="4" ng-maxlength="20" required />
+          <input type="text" class="form-control" id="register__username" ng-model="vm.username" placeholder="Usuario" name="username" ng-minlength="3" ng-maxlength="20" required />
           <span class="label label-warning" ng-show="registform.username.$dirty && registform.username.$invalid">
             <span ng-show="registform.username.$error.required">Usuario es requerido.</span>
-            <span ng-show="registform.username.$error.minlength">Usuario de mínimo 4 caracteres.</span>
+            <span ng-show="registform.username.$error.minlength">Usuario de mínimo 3 caracteres.</span>
             <span ng-show="registform.username.$error.maxlength">Usuario de máximo 20 caracteres.</span>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="register__nombre">Nombre</label>
+          <input type="text" class="form-control" id="register__nombre" ng-model="vm.first_name" placeholder="Nombre De Usuario" name="nombre" ng-minlength="3" ng-maxlength="100" required />
+          <span class="label label-warning" ng-show="registform.nombre.$dirty && registform.nombre.$invalid">
+            <span ng-show="registform.nombre.$error.required">Nombre es requerido.</span>
+            <span ng-show="registform.nombre.$error.minlength">Nombre de mínimo 3 caracteres.</span>
+            <span ng-show="registform.nombre.$error.maxlength">Nombre de máximo 100 caracteres.</span>
+          </span>
+        </div>
+
+        <div class="form-group">
+          <label for="register__apellido">Apellido</label>
+          <input type="text" class="form-control" id="register__apellido" ng-model="vm.last_name" placeholder="Apellido De Usuario" name="apellido" ng-minlength="3" ng-maxlength="100" required />
+          <span class="label label-warning" ng-show="registform.apellido.$dirty && registform.apellido.$invalid">
+            <span ng-show="registform.apellido.$error.required">Apellido es requerido.</span>
+            <span ng-show="registform.apellido.$error.minlength">Apellido de mínimo 3 caracteres.</span>
+            <span ng-show="registform.apellido.$error.maxlength">Apellido de máximo 100 caracteres.</span>
           </span>
         </div>
 

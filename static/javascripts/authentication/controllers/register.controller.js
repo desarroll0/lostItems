@@ -17,7 +17,6 @@
   */
   function RegisterController($location, $scope, Authentication, Snackbar) {
     var vm = this;
-    var Authentication = Authentication;
     vm.register = register;
 
     activate();
@@ -41,7 +40,7 @@
     */
     function register(registform) {
 
-      Authentication.register(vm.email, vm.password, vm.username).
+      Authentication.register(vm.email, vm.password, vm.username, vm.first_name, vm.last_name).
       then(registerSuccessFn, registerErrorFn);  
       /**
       * @name registerSuccessFn
@@ -53,6 +52,8 @@
         vm.email = "";
         vm.password = "";
         vm.username = "";
+        vm.first_name = "";
+        vm.last_name = "";
         registform.$setPristine();
         registform.$setValidity();
         
@@ -62,9 +63,16 @@
       * @desc Log "Epic failure!" to the console
       */
       function registerErrorFn(resp, status, headers, config) {
-        if(resp.data.message)Snackbar.error(resp.data.message);
-        if(resp.data.detail)Snackbar.error(resp.data.detail);
-        console.error('Epic failure!');
+        if(resp.data){
+          if(resp.data.message)Snackbar.error(resp.data.message);
+          else if(resp.data.detail)Snackbar.error(resp.data.detail);
+          else{
+            //Shows the first property and value of response
+            var jsonresp = resp.data;//JSON.parse(resp.data);
+            Snackbar.error(Object.keys(resp.data)[0]+' : '+resp.data[Object.keys(resp.data)[0]]);
+          }
+        }  
+        else Snackbar.error("Error inesperado");
       }
 
 

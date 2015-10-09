@@ -3,11 +3,8 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager
 
 # Create your models here.
-
-
-
 class AccountManager(BaseUserManager):
-	def create_user(self, email, password=None, **kwargs):
+	def create_user(self, email, first_name, last_name, password=None, **kwargs):
 		if not email:
 			raise ValueError('Users must have a valid email address.')
 		if not kwargs.get('username'):
@@ -15,14 +12,15 @@ class AccountManager(BaseUserManager):
 
 		account = self.model(
 			email = self.normalize_email(email), username=kwargs.get('username')
+			, last_name=last_name, first_name=first_name
 			)
 		account.set_password(password)
 		account.save()
 
 		return account
 
-	def create_superuser(self, email, password, **kwargs):
-		account = self.create_user(email, password, **kwargs)
+	def create_superuser(self, email, first_name, last_name, password, **kwargs):
+		account = self.create_user(email, first_name, last_name, password, **kwargs)
 
 		account.is_admin = True
 		account.is_staff = True
@@ -32,11 +30,10 @@ class AccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser):
 	email = models.EmailField(unique=True)
-	username = models.CharField(max_length=40, unique=True)
+	username = models.CharField(max_length=20, unique=True,null=False)
 
-	first_name =models.CharField(max_length=40, blank=True)
-	last_name =models.CharField(max_length=40, blank=True)
-	tagline = models.CharField(max_length=40, blank=True)
+	first_name =models.CharField(max_length=100, blank=False, null=False)
+	last_name =models.CharField(max_length=100, blank=False, null=False)
 
 	is_admin = models.BooleanField(default=False)
 	is_staff = models.BooleanField(default=True)
@@ -47,7 +44,7 @@ class Account(AbstractBaseUser):
 	objects = AccountManager()
 
 	USERNAME_FIELD ='email'
-	REQUIRED_FIELDS = ['username']
+	REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
 
 	def __unicode__(self):
 		return self.email
