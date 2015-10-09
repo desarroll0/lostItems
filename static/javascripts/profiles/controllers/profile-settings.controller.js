@@ -73,7 +73,7 @@
     * @memberOf lostitems.profiles.controllers.ProfileSettingsController
     */
     function destroy() {
-      Profile.destroy(vm.profile.username).then(profileSuccessFn, profileErrorFn);
+      Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
 
       /**
       * @name profileSuccessFn
@@ -110,7 +110,7 @@
       * @desc Show success snackbar
       */
       function profileSuccessFn(data, status, headers, config) {
-        Snackbar.show('Your profile has been updated.');
+        Snackbar.show('Su perfil ha sido actualizado.');
       }
 
 

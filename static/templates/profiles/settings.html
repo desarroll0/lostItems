@@ -1,9 +1,37 @@
 <div class="col-md-4 col-md-offset-4">
   <div class="well" ng-show="vm.profile">
-    <form role="form" class="settings" ng-submit="vm.update()">
+    <form role="form" class="settings" name="settingsform" ng-submit="vm.update()" novalidate>
+
+      <div class="form-group">
+        <label for="settings__username">Usuario</label>
+        <label class="form-control" id="settings__username">{{vm.profile.username|uppercase}}</label>
+      </div>
+
       <div class="form-group">
         <label for="settings__email">Correo</label>
-        <input type="text" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="correo@ejemplo.com" />
+        <input type="email" class="form-control" id="settings__email" ng-model="vm.profile.email" placeholder="correo@ejemplo.com" name="email" required />
+          <span class="label label-warning" ng-show="settingsform.email.$dirty && settingsform.email.$invalid">
+            <span ng-show="settingsform.email.$error.required">Email es requerido.</span>
+            <span ng-show="settingsform.email.$error.email">Email es inválido (Ejemplo: correo@ejemplo.com).</span>
+          </span>
+      </div>
+
+      <div class="form-group">
+        <label for="settings__nombre">Nombre</label>
+        <input type="text" class="form-control" id="settings__nombre" ng-model="vm.profile.first_name" placeholder="Nombre De Usuario" name="nombre" ng-minlength="3" ng-maxlength="100"  required />
+          <span class="label label-warning" ng-show="settingsform.nombre.$dirty && settingsform.nombre.$invalid">
+            <span ng-show="settingsform.nombre.$error.required">Nombre es requerido.</span>
+            <span ng-show="settingsform.nombre.$error.minlength">Nombre de mínimo 3 caracteres.</span>
+            <span ng-show="settingsform.nombre.$error.maxlength">Nombre de máximo 100 caracteres.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="settings__nombre">Apellido</label>
+        <input type="text" class="form-control" id="settings__apellido" ng-model="vm.profile.last_name" placeholder="Apellido De Usuario" name="apellido" ng-minlength="3" ng-maxlength="100"  required />
+          <span class="label label-warning" ng-show="settingsform.apellido.$dirty && settingsform.apellido.$invalid">
+            <span ng-show="settingsform.apellido.$error.required">Apellido es requerido.</span>
+            <span ng-show="settingsform.apellido.$error.minlength">Apellido de mínimo 3 caracteres.</span>
+            <span ng-show="settingsform.apellido.$error.maxlength">Apellido de máximo 100 caracteres.</span>
       </div>
 
       <div class="form-group">
@@ -16,10 +44,6 @@
         <input type="password" class="form-control" id="settings__confirm-password" ng-model="vm.profile.confirm_password" placeholder="******" />
       </div>
 
-      <div class="form-group">
-        <label for="settings__username">Usuario</label>
-        <input type="text" class="form-control" id="settings__username" ng-model="vm.profile.username" placeholder="NombreDeUsuario" />
-      </div>
 <!--
       <div class="form-group">
         <label for="settings__tagline">Tagline</label>
@@ -27,7 +51,7 @@
       </div>
 -->
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" ng-disabled="settingsform.$invalid" class="btn btn-primary">Enviar</button>
         <button type="button" class="btn btn-danger pull-right" ng-click="vm.destroy()">Eliminar Cuenta</button>
       </div>
     </form>
