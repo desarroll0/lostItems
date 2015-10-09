@@ -25,11 +25,6 @@
     * @memberOf lostitems.posts.controllers.NewPostController
     */
     function submit() {
-<<<<<<< HEAD
-=======
-
->>>>>>> ba327165c30a1be59812004534f58b35d11c04ef
-
       $scope.closeThisDialog();
       
       Upload.upload({
@@ -51,7 +46,6 @@
       * @desc Show snackbar with success message
       */
       function createPostSuccessFn(data, status, headers, config) {
-<<<<<<< HEAD
         //Hack: The url file is returning with the "/api/v1/posts/" string wrongly. Issue with the django rest framework
         var datafile =  data.data.datafile.replace(data.config.url, "/");
       $rootScope.$broadcast('post.created', {
@@ -63,17 +57,6 @@
       });
 
       $scope.closeThisDialog();
-=======
-        console.log(data.data);
-        $rootScope.$broadcast('post.created', {
-          content: vm.content,
-          datafile: data.data.datafile,
-          author: {
-            username: Authentication.getAuthenticatedAccount().username
-          }
-        });
->>>>>>> ba327165c30a1be59812004534f58b35d11c04ef
-
         Snackbar.show('Success! Post created.');
       }
 
