@@ -25,14 +25,6 @@
     * @memberOf lostitems.posts.controllers.NewPostController
     */
     function submit() {
-      $rootScope.$broadcast('post.created', {
-        content: vm.content,
-        author: {
-          username: Authentication.getAuthenticatedAccount().username
-        }
-      });
-
-      $scope.closeThisDialog();
 
       Upload.upload({
                   url: '/api/v1/posts/',
@@ -55,6 +47,16 @@
       * @desc Show snackbar with success message
       */
       function createPostSuccessFn(data, status, headers, config) {
+
+      $rootScope.$broadcast('post.created', {
+        content: vm.content,
+        author: {
+          username: Authentication.getAuthenticatedAccount().username
+        }
+      });
+
+      $scope.closeThisDialog();
+
         Snackbar.show('Success! Post created.');
       }
 
@@ -64,6 +66,15 @@
       * @desc Propogate error event and show snackbar with error message
       */
       function createPostErrorFn(data, status, headers, config) {
+      $rootScope.$broadcast('post.created', {
+        content: vm.content,
+        author: {
+          username: Authentication.getAuthenticatedAccount().username
+        }
+      });
+
+      $scope.closeThisDialog();
+      
         $rootScope.$broadcast('post.created.error');
         if(data.error)Snackbar.error(data.error);
         else Snackbar.error("Error inesperado!");
