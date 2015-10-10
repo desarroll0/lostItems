@@ -22,8 +22,6 @@ class AccountSerializer(serializers.ModelSerializer):
 
 		password = validated_data.get('password', None)
 		confirm_password = validated_data.get('confirm_password', None)
-		print('password:'+str(password))
-		print('confirm_password:'+str(confirm_password))
 		if password and confirm_password:
 			if password == confirm_password:
 				instance.set_password(password)
