@@ -37,12 +37,12 @@
       // Redirect if not logged in
       if (!authenticatedAccount) {
         $location.url('/');
-        Snackbar.error('You are not authorized to view this page.');
+        Snackbar.error('No está autorizado para ver ésta página.');
       } else {
         // Redirect if logged in, but not the owner of this profile.
         if (authenticatedAccount.username !== username) {
           $location.url('/');
-          Snackbar.error('You are not authorized to view this page.');
+          Snackbar.error('No está autorizado para ver ésta página.');
         }
       }
 
@@ -74,12 +74,12 @@
     */
     function destroy() {
       Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
-
       /**
       * @name profileSuccessFn
       * @desc Redirect to index and display success snackbar
       */
       function profileSuccessFn(data, status, headers, config) {
+        return;
         Authentication.unauthenticate();
         window.location = '/';
 

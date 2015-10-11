@@ -18,6 +18,7 @@
   function RegisterController($location, $scope, Authentication, Snackbar) {
     var vm = this;
     vm.register = register;
+    vm.is_active = true;
 
     activate();
 
@@ -40,7 +41,7 @@
     */
     function register(registform) {
 
-      Authentication.register(vm.email, vm.password, vm.username, vm.first_name, vm.last_name).
+      Authentication.register(vm.email, vm.password, vm.username, vm.first_name, vm.last_name, vm.is_active).
       then(registerSuccessFn, registerErrorFn);  
       /**
       * @name registerSuccessFn

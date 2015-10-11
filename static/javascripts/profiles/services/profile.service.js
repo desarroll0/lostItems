@@ -28,7 +28,9 @@
     * @memberOf lostitems.profiles.services.Profile
     */
     function destroy(profile) {
-      return $http.delete('/api/v1/accounts/' + profile.id + '/');
+      //return $http.delete('/api/v1/accounts/' + profile.username + '/');
+      profile.is_active = false;
+      return Profile.update(profile);
     }
     /**
     * @name get
@@ -48,6 +50,7 @@
     * @memberOf lostitems.profiles.services.Profile
     */
     function update(profile) {
+      console.log(profile.is_active);
       return $http.put('/api/v1/accounts/' + profile.username + '/', profile);
     }
   }

@@ -19,6 +19,7 @@ class AccountManager(BaseUserManager):
 
 		return account
 
+
 	def create_superuser(self, email, first_name, last_name, password, **kwargs):
 		account = self.create_user(email, first_name, last_name, password, **kwargs)
 
@@ -38,6 +39,8 @@ class Account(AbstractBaseUser):
 	is_admin = models.BooleanField(default=False)
 	is_staff = models.BooleanField(default=True)
 
+	#is_active = models.BooleanField(default=True)
+
 	created_at = models.DateTimeField(auto_now_add=True)
 	updated_at = models.DateTimeField(auto_now=True)
 
@@ -45,6 +48,12 @@ class Account(AbstractBaseUser):
 
 	USERNAME_FIELD ='email'
 	REQUIRED_FIELDS = ['username', 'first_name', 'last_name']
+
+	#def save(self, *args, **kwargs):
+	#	# do anything you need before saving
+	#	print('pasa')
+	#	super(Account, self).save(*args, **kwargs)
+
 
 	def __unicode__(self):
 		return self.email
@@ -54,4 +63,7 @@ class Account(AbstractBaseUser):
 
 	def get_short_name(self):
 		return self.first_name
+
+	def set_is_active(self, value):
+		return super.set_is_active(value)
 

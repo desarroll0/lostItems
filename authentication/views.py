@@ -37,23 +37,11 @@ class AccountViewSet(viewsets.ModelViewSet):
             'message': 'No es posible registrar el usuario: '+serializer.errors[0]
         }, status=status.HTTP_400_BAD_REQUEST)
 
-'''    def perform_update(self, serializer):
-        print(self.request)
-        return
-        instance = serializer.update(author=self.request.user, datafile =self.request.data.get('file'))
-        return super(AccountViewSet, self).perform_update(serializer)
-
-    def update(self, request, username):
-        serializer = self.serializer_class(data=request.data)
-        print(request)
-        if serializer.is_valid(raise_exception=True):
-            Account.objects.update_user(**serializer.validated_data)
-            return Response(serializer.validated_data, status=status.HTTP_201_CREATED)
-        return Response({
-            'status': 'Bad request',
-            'message': 'No es posible modificar el usuario: '+serializer.errors[0]
-        }, status=status.HTTP_400_BAD_REQUEST)
-'''
+    def perform_update(self, serializer):
+        print(self.request.data)
+        instance = serializer.save(account=self.request.data)
+        print('perform_update: '+str(instance.is_active))
+        return super(AccountViewSet, self).perform_create(serializer)
 
 class LoginView(views.APIView):
     def post(self, request, format=None):
@@ -72,12 +60,12 @@ class LoginView(views.APIView):
             else:
                 return Response({
                     'status': 'Unauthorized',
-                    'message': 'This account has been disabled.'
+                    'message': 'Esta cuenta ha sido deshabilitada.'
                 }, status=status.HTTP_401_UNAUTHORIZED)
         else:
             return Response({
                 'status': 'Unauthorized',
-                'message': 'Username/password combination invalid.'
+                'message': 'Username/password combinación inválida.'
             }, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(views.APIView):
