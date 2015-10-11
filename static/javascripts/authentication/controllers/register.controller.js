@@ -41,14 +41,14 @@
     */
     function register(registform) {
 
-      Authentication.register(vm.email, vm.password, vm.username, vm.first_name, vm.last_name, vm.is_active).
+      Authentication.register(angular.lowercase(vm.email), vm.password, vm.username, vm.first_name, vm.last_name, vm.is_active).
       then(registerSuccessFn, registerErrorFn);  
       /**
       * @name registerSuccessFn
       * @desc Log the new user in
       */
       function registerSuccessFn(resp, status, headers, config) {
-        Snackbar.show("Creado "+vm.email+" ( "+vm.username+" ) Exitosamente! ");
+        Snackbar.show("Creado "+angular.lowercase(vm.email)+" ( "+vm.username+" ) Exitosamente! ");
         
         vm.email = "";
         vm.password = "";
@@ -75,9 +75,7 @@
         }  
         else Snackbar.error("Error inesperado");
       }
-
-
-
+      
     }
   }
 })();

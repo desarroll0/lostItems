@@ -21,7 +21,7 @@ class PostViewSet(viewsets.ModelViewSet):
         return (permissions.IsAuthenticated(), IsAuthorOfPost(),)
 
     def perform_create(self, serializer):
-        instance = serializer.save(author=self.request.user, datafile =self.request.data.get('file'))
+        instance = serializer.save(author=self.request.user, datafile =self.request.data.get('datafile'))
         return super(PostViewSet, self).perform_create(serializer)
 
     def list(self, request):

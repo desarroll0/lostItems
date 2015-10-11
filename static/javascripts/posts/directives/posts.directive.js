@@ -24,9 +24,9 @@
       restrict: 'E',
       scope: {
         posts: '=',
-        mediaroot: '=',
+        auth: '=',
       },
-      templateUrl: '/static/templates/posts/posts.html'
+      templateUrl: '/static/templates/posts/posts_.html'
     };
 
     return directive;

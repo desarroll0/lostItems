@@ -1,17 +1,56 @@
 <form role="form" name="itemform"  novalidate>
   <div class="form-group">
-    <label for="post__content">Nuevo Objeto Perdido</label>
-    <textarea class="form-control" 
+    <label for="post__content">Nuevo Objeto</label>
+
+
+    <div class="form-group">
+      <label for="item__brand">Objeto/Marca</label>
+      <input type="text" class="form-control" id="item__brand" ng-model="vm.item.brand" placeholder="Ej: Camara fotografica Nikon" name="brand" ng-minlength="3" ng-maxlength="200" required />
+      <span class="label label-warning" ng-show="itemform.brand.$dirty && itemform.brand.$invalid">
+        <span ng-show="itemform.brand.$error.required">Objeto es requerido.</span>
+        <span ng-show="itemform.brand.$error.minlength">Objeto de mínimo 3 caracteres.</span>
+        <span ng-show="itemform.brand.$error.maxlength">Objeto de máximo 200 caracteres.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="item__color">Color</label>
+      <input type="text" class="form-control" id="item__color" ng-model="vm.item.color" placeholder="Color (No es necesario)" name="color" ng-maxlength="100" />
+      <span class="label label-warning" ng-show="itemform.color.$dirty && itemform.color.$invalid">
+        <span ng-show="itemform.color.$error.maxlength">Color de máximo 100 caracteres.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="item__material">Material</label>
+      <input type="text" class="form-control" id="item__material" ng-model="vm.item.material" placeholder="Material del que está hecho el objeto.(No es necesario)" name="material" ng-maxlength="100" />
+      <span class="label label-warning" ng-show="itemform.material.$dirty && itemform.material.$invalid">
+        <span ng-show="itemform.material.$error.maxlength">Material de máximo 100 caracteres.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="item__reference">Reference</label>
+      <input type="text" class="form-control" id="item__reference" ng-model="vm.item.reference" placeholder="Referencia del objeto.(No es necesario)" name="reference" ng-maxlength="100" />
+      <span class="label label-warning" ng-show="itemform.reference.$dirty && itemform.reference.$invalid">
+        <span ng-show="itemform.reference.$error.maxlength">Referencia de máximo 100 caracteres.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="post__content">Descripción</label>
+          <textarea class="form-control" 
               id="post__content" 
               rows="3" 
-              placeholder="Descripción del objeto a registrar" 
-              ng-model="vm.content">
-    </textarea>
+              placeholder="Descripción adicional del objeto" 
+              ng-model="vm.item.content">
+          </textarea>
+    </div>
+
     <!--
     <input class="form-control"  
               id="post__image" type="file" ng-model="vm.datafile">-->
-    <div class="btn btn-default " ngf-select="" ng-model="vm.datafile" name="datafile" ngf-pattern="'image/*'" accept="image/*" 
-    ngf-max-size="1MB" >
+    <div class="btn btn-default" ngf-select="" ng-model="vm.item.datafile" name="datafile" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="1MB" >
     <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 
     Seleccionar Archivo</div>
     <div ng-repeat="err in itemform.datafile.$ngfValidations">

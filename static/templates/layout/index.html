@@ -4,7 +4,7 @@
   ng-dialog="/static/templates/posts/new-post.html"
   ng-dialog-controller="NewPostController as vm"></a>
 
-  <posts posts="vm.posts" mediaroot="vm.mediaroot" ng-show="vm.posts && vm.posts.length"></posts>
+  <posts posts="vm.posts" auth="vm.auth" ng-show="vm.posts && vm.posts.length"></posts>
  
   <div class="jumbotron profile__header" ng-hide="vm.posts && vm.posts.length">
     <h2 class="profile__username console_message"><span class="glyphicon glyphicon-console" aria-hidden="true"></span> No se encontraron elementos para mostrar!</h2>

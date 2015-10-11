@@ -9,17 +9,21 @@
     .module('lostitems.posts.controllers')
     .controller('PostsController', PostsController);
 
-  PostsController.$inject = ['$scope', 'Posts'];
+  PostsController.$inject = ['$scope', 'Posts', 'Authentication'];
 
   /**
   * @namespace PostsController
   */
-  function PostsController($scope, Posts) {
+  function PostsController($scope, Posts, Authentication) {
     var vm = this;
 
     vm.columns = [];
 
     activate();
+
+    vm.auth = Authentication.isAuthenticated();
+
+    vm.recover = recover;
 
 
     /**
@@ -30,6 +34,18 @@
     function activate() {
       $scope.$watchCollection(function () { return $scope.posts; }, render);
       $scope.$watch(function () { return $(window).width(); }, render);
+    }
+
+
+    /**
+    * @name recover
+    * @desc Save in db the item recovered by the owner
+    * @memberOf lostitems.posts.controllers.PostsController
+    */
+    function recover(recovered_item) {
+      $scope.closeThisDialog();
+      console.log('asdf');
+      return;
     }
 
 
@@ -73,7 +89,7 @@
       */
       function columnMapFn(column) {
         var lengths = column.map(function (element) {
-          return element.content.length;
+          return element.brand ? element.brand.length : 1;
         });
 
         return lengths.reduce(sum, 0) * column.length;
@@ -103,15 +119,20 @@
     function render(current, original) {
       if (current !== original) {
         vm.columns = [];
-
+        // Calc number of columns based on the window.width
         for (var i = 0; i < calculateNumberOfColumns(); ++i) {
           vm.columns.push([]);
         }
-
+        /*
         for (var i = 0; i < current.length; ++i) {
           var column = approximateShortestColumn();
-
           vm.columns[column].push(current[i]);
+        }
+        */
+        var j = 0;
+        for (var i = 0; i < current.length; ++i) {
+            vm.columns[j].push(current[i]);
+            j = j >= vm.columns.length-1 ? 0 : j+1;
         }
       }
       Posts.setColumns(vm.columns);

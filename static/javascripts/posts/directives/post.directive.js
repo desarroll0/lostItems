@@ -22,9 +22,9 @@
       restrict: 'E',
       scope: {
         post: '=',
-        mediaroot: '=',
+        auth: '=',
       },
-      templateUrl: '/static/templates/posts/onepost.html'
+      templateUrl: '/static/templates/posts/onepost_.html'
     };
 
     return directive;

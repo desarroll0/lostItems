@@ -47,7 +47,7 @@
     * @returns {Promise}
     * @memberOf lostitems.posts.services.Posts
     */
-    function create(content, datafile) {
+    function create(item, datafile) {
        var fd = new FormData();
 
        var url = '/api/v1/posts/';
@@ -57,9 +57,7 @@
        //});
 
        //sample data
-       var data ={
-        content: content
-       };
+       var data = item;
 
        fd.append("content", content);
 

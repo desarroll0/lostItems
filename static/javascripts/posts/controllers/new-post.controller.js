@@ -26,19 +26,21 @@
     */
     function submit(itemform) {
       if(itemform.datafile.$ngfValidations){
-        if (itemform.$valid && vm.datafile ) {
+        if (itemform.$valid && vm.item.datafile ) {
         }
         else{ 
           console.log(itemform.datafile);
           return;
         }
       }
-
+      //console.log(vm.item);
+      //return;
       $scope.closeThisDialog();
       
       Upload.upload({
                 url: '/api/v1/posts/',
-                data: {file: vm.datafile, 'content': vm.content}
+                //data: {file: vm.datafile, content: vm.content}
+                data: vm.item
             }).then(createPostSuccessFn,createPostErrorFn, 
             function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
@@ -55,14 +57,18 @@
       */
       function createPostSuccessFn(data, status, headers, config) {
         //Hack: The url file is returning with the "/api/v1/posts/" string wrongly. Issue with the django rest framework
-        var datafile = (data.data.datafile ?  data.data.datafile.replace(data.config.url, "/") : '')  ;
+        //var datafile = (data.data.datafile ?  data.data.datafile.replace(data.config.url, "/") : '')  ;
+        if(data.data.datafile) data.data.datafile = data.data.datafile.replace(data.config.url, "/")
+        else data.data.datafile = '';
+        /*
         $rootScope.$broadcast('post.created', {
           content: vm.content,
           datafile: datafile,
           author: {
             username: Authentication.getAuthenticatedAccount().username
           }
-        });
+        });*/
+        $rootScope.$broadcast('post.created', data.data);
 
         $scope.closeThisDialog();
         Snackbar.show('El objeto se ha registrado correctamente.');
@@ -84,10 +90,10 @@
 
       $scope.closeThisDialog();
       
-        $rootScope.$broadcast('post.created.error');
-        if(data.error)Snackbar.error(data.error);
-        else Snackbar.error("Error inesperado!");
+      $rootScope.$broadcast('post.created.error');
+      if(data.error)Snackbar.error(data.error);
+      else Snackbar.error("Error inesperado!");
       }
-    }
+    }//end submit
   }
 })();
