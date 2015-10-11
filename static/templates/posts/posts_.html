@@ -1,0 +1,14 @@
+<div class="row" ng-cloak>
+  <div ng-repeat="column in vm.columns">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+      <div ng-repeat="post in column">
+        <post post="post" auth="vm.auth"></post>
+      </div>
+    </div>
+  </div>
+  <div ng-hide="vm.columns && vm.columns.length">
+    <div class="col-sm-12 no-posts-here">
+      <em>No hay elementos aquí.</em>
+    </div>
+  </div>
+</div>

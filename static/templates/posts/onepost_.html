@@ -1,0 +1,49 @@
+<div class="row">
+  <div class="col-sm-12">
+    <div class="well">
+      <div class="post">
+        <div class="container-fluid">
+        <div clarr="row ">
+            <img src="{{ post.datafile }}" alt="" class="img-circle post_img col-xs-12 col-sm-12 col-md-9">
+            <div class="post__meta col-xs-12 col-sm-12 col-md-3">
+              <a href="/+{{ post.author.username }}">
+                +{{ post.author.username }}
+              </a>
+            </div>
+        </div>
+        <div clarr="row ">
+          <div class="post__brand col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <b>{{ post.brand }} ({{ post.created_at | date : format : timezone }})</b>
+          </div>
+        </div>
+        <div clarr="row">
+          <div class="post__color col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="post.color" >
+            <b>Color: </b>{{ post.color }}
+          </div>
+        </div>
+        <div clarr="row">
+          <div class="post__material col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="post.material" >
+            <b>Hecho de: </b>{{ post.material }}
+          </div>
+        </div>
+        <div clarr="row">
+          <div class="post__reference col-xs-12 col-sm-12 col-md-12 col-lg-12" ng-show="post.reference" >
+            <b>Referencia: </b>{{ post.reference }}
+          </div>
+        </div>
+        <div clarr="row">
+          <div class="post__content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            {{ post.content }}
+          </div>
+        </div>
+        </div>
+            <div class="btn btn-default btn-raised" ng-show="auth"  ng-dialog="/static/templates/posts/regist_recovered_post.html" ng-dialog-controller="PostsController as vm" ng-dialog-data="{{post}}"><i class="lead mdi-content-reply-all"></i> Registrar entrega</div>
+            <!--
+            <a class="btn btn-primary btn-fab btn-raised mdi-content-add"
+              href="javascript:void(0)"
+              ng-dialog="/static/templates/posts/new-post.html"
+              ng-dialog-controller="NewPostController as vm"></a>-->
+      </div>
+    </div>
+  </div>
+</div>

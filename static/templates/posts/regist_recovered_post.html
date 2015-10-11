@@ -1,0 +1,32 @@
+<form role="form" name="regist_recovered"  novalidate>
+  <div class="form-group">
+    <label for="post__content">Registrar objeto entregado al dueño</label>
+
+    <div class="form-group">
+      <label for="recovered_by">Entregado a:</label>
+      <input type="text" class="form-control" id="recovered_by" ng-model="vm.item.recovered_by" placeholder="Nombre de la persona a la que se entrega el objeto" name="recovered_by" ng-minlength="3" ng-maxlength="200" required />
+      <span class="label label-warning" ng-show="regist_recovered.recovered_by.$dirty && regist_recovered.recovered_by.$invalid">
+        <span ng-show="regist_recovered.recovered_by.$error.required">Entregado a, es requerido.</span>
+        <span ng-show="regist_recovered.recovered_by.$error.minlength">Entregado a, de mínimo 3 caracteres.</span>
+        <span ng-show="regist_recovered.recovered_by.$error.maxlength">Entregado a, de máximo 200 caracteres.</span>
+      </span>
+    </div>
+
+    <div class="form-group">
+      <label for="recovered_contact">Contacto (email/cel/tel):</label>
+      <input type="text" class="form-control" id="recovered_contact" ng-model="vm.item.recovered_contact" placeholder="Contacto:" name="recovered_contact" ng-minlength="3" ng-maxlength="200" required />
+      <span class="label label-warning" ng-show="itemform.recovered_contact.$dirty && itemform.recovered_contact.$invalid">
+        <span ng-show="itemform.recovered_contact.$error.required">Contacto es requerido.</span>
+        <span ng-show="itemform.recovered_contact.$error.minlength">Contacto de mínimo 3 caracteres.</span>
+        <span ng-show="itemform.recovered_contact.$error.maxlength">Contacto de máximo 200 caracteres.</span>
+      </span>
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <button type="submit" ng-click="vm.recover(regist_recovered, post)" class="btn btn-primary">
+      Guardar
+    </button>
+  </div>
+</form>
