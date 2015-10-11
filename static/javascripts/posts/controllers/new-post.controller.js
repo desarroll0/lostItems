@@ -25,13 +25,13 @@
     * @memberOf lostitems.posts.controllers.NewPostController
     */
     function submit(itemform) {
-        console.log(vm.datafile);
-      if (itemform.$valid && vm.datafile ) {
-        console.log('Validado correctamente');
-      }
-      else{ 
-        console.log(itemform.datafile);
-        return;
+      if(itemform.datafile.$ngfValidations){
+        if (itemform.$valid && vm.datafile ) {
+        }
+        else{ 
+          console.log(itemform.datafile);
+          return;
+        }
       }
 
       $scope.closeThisDialog();
@@ -42,7 +42,7 @@
             }).then(createPostSuccessFn,createPostErrorFn, 
             function (evt) {
                 var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                console.log('progress: ' + progressPercentage + '% ' + (evt.config.data.file ? evt.config.data.file.name : 'sin adjunto' ));
             });
 
 
@@ -55,7 +55,7 @@
       */
       function createPostSuccessFn(data, status, headers, config) {
         //Hack: The url file is returning with the "/api/v1/posts/" string wrongly. Issue with the django rest framework
-        var datafile =  data.data.datafile.replace(data.config.url, "/");
+        var datafile = (data.data.datafile ?  data.data.datafile.replace(data.config.url, "/") : '')  ;
         $rootScope.$broadcast('post.created', {
           content: vm.content,
           datafile: datafile,

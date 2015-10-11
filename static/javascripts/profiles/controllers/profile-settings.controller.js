@@ -73,17 +73,16 @@
     * @memberOf lostitems.profiles.controllers.ProfileSettingsController
     */
     function destroy() {
+
       Profile.destroy(vm.profile).then(profileSuccessFn, profileErrorFn);
       /**
       * @name profileSuccessFn
       * @desc Redirect to index and display success snackbar
       */
       function profileSuccessFn(data, status, headers, config) {
+        Authentication.logout();
+        Snackbar.show('Su cuenta ha sido deshabilitada.');
         return;
-        Authentication.unauthenticate();
-        window.location = '/';
-
-        Snackbar.show('Your account has been deleted.');
       }
 
 

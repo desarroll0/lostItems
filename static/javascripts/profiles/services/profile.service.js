@@ -50,7 +50,6 @@
     * @memberOf lostitems.profiles.services.Profile
     */
     function update(profile) {
-      console.log(profile.is_active);
       return $http.put('/api/v1/accounts/' + profile.username + '/', profile);
     }
   }

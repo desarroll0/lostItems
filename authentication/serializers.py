@@ -3,32 +3,18 @@ from rest_framework import serializers
 from authentication.models import Account
 
 class AccountSerializer(serializers.ModelSerializer):
-	print("AccountSerializer")
+
 	password = serializers.CharField(write_only=True, required=False)
 	confirm_password =serializers.CharField(write_only=True, required=False)
 	is_active =serializers.BooleanField(required=True)
 
-	def validate(self, value):
-		"""
-		Check that the blog post is about Django.
-		"""
-		print('validateeeeeeeeeeeee!!!!!!')
-		print(value)
-		self.is_active = value['is_active']
-		return value
-
 	def update(self, instance, validated_data):
-		print(':::::::::'+str(self.is_active))
-		print('update1: '+str(instance.is_active))
-		print(validated_data.get('is_active', None))
 		instance.username = validated_data.get('username', instance.username)
 		instance.first_name = validated_data.get('first_name', instance.first_name)
 		instance.last_name = validated_data.get('last_name', instance.last_name)
 		instance.email = validated_data.get('email', instance.email)
-		instance.is_active = validated_data.get('is_active', self.is_active)
-		print('update2: '+str(instance.is_active))
+		instance.is_active = validated_data.get('is_active', instance.is_active)
 		instance.save()
-		print('updated_instance'+str(instance.is_active))
 		password = validated_data.get('password', None)
 		confirm_password = validated_data.get('confirm_password', None)
 		if password and confirm_password:
@@ -39,15 +25,7 @@ class AccountSerializer(serializers.ModelSerializer):
 				update_session_auth_hash(self.context.get('request'), instance)
 			else:
 				raise serializers.ValidationError("La contrasena no coincide con la confirmación de la contrasena")
-
 		return instance
-	def put(self, request, ic_id):
-		item_collection = get_object_or_404(ItemCollection, pk=ic_id)
-		serializer = ItemCollectionSerializer(
-			item_collection, data=request.data)
-		if serializer.is_valid(raise_exception=True):
-			serializer.save()
-		return Response(serializer.data)
 
 	class Meta:
 		model = Account

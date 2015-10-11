@@ -9,6 +9,13 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    color = models.CharField(max_length=100, blank=True)
+    reference = models.CharField(max_length=100, blank=True)
+    material = models.CharField(max_length=100, blank=True)
+    distinctive_sign = models.CharField(max_length=200, blank=True)
+    brand = models.CharField(max_length=200, blank=True)
+    recovered = models.BooleanField(default=False)
+
     datafile = models.ImageField(
         upload_to='items/%Y/%m',
         #height_field="image_height",
