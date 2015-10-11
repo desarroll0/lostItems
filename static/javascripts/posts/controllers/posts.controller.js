@@ -25,6 +25,19 @@
 
     vm.recover = recover;
 
+    vm.modalRecover = function(){
+     var modalInstance = $modal.open({
+        templateUrl: '/static/templates/posts/regist_recovered_post.html',
+        controller: 'RecoverPostController',
+        resolve: {
+           post: function () {
+             return 12312;
+           }
+         }
+      });
+    };
+
+
 
     /**
     * @name activate
@@ -35,19 +48,6 @@
       $scope.$watchCollection(function () { return $scope.posts; }, render);
       $scope.$watch(function () { return $(window).width(); }, render);
     }
-
-
-    /**
-    * @name recover
-    * @desc Save in db the item recovered by the owner
-    * @memberOf lostitems.posts.controllers.PostsController
-    */
-    function recover(recovered_item) {
-      $scope.closeThisDialog();
-      console.log('asdf');
-      return;
-    }
-
 
     /**
     * @name calculateNumberOfColumns

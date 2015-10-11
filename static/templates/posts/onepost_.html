@@ -38,6 +38,7 @@
         </div>
         </div>
             <div class="btn btn-default btn-raised" ng-show="auth"  ng-dialog="/static/templates/posts/regist_recovered_post.html" ng-dialog-controller="PostsController as vm" ng-dialog-data="{{post}}"><i class="lead mdi-content-reply-all"></i> Registrar entrega</div>
+            <div class="btn btn-default btn-raised" ng-show="auth" ng-click="PostsController.modalRecover" ><i class="lead mdi-content-reply-all"></i> Registrar entrega*</div>
             <!--
             <a class="btn btn-primary btn-fab btn-raised mdi-content-add"
               href="javascript:void(0)"
