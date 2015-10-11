@@ -12,6 +12,12 @@
 
     <div class="collapse navbar-collapse" id="not-google-plus-nav">
       <ul class="nav navbar-nav pull-right">
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">Contactenos: <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a>Contactenos : objetos_perdidos_campus@gmail.com - Tel: #######</a></li>                      
+          </ul>
+        </li>
         {% if user.is_authenticated %}
           <li><a href="/+{{ user.username }}">+{{ user.username }}</a></li>
           <li><a href="/+{{ user.username }}/settings">Mi Cuenta</a></li>
@@ -21,6 +27,7 @@
           <li><a href="/login">Ingresar</a></li>
         {% endif %}
       </ul>
+
     </div> <!-- /.collapse.navbar-collapse -->
   </div> <!-- /.container-fluid -->
 </nav>

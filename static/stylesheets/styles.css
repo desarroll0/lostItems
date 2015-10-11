@@ -11,6 +11,10 @@
 	z-index: 1000;
 }
 
+.post_img{
+  width: 10em;
+}
+
 .post .post__meta {
   font-weight: bold;
   text-align: right;
@@ -22,6 +26,6 @@
 }
 .btn-add-new-post {
   position: fixed;
-  bottom: 20px;
+  bottom: 70px;
   right: 20px;
 }
