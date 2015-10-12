@@ -20,6 +20,7 @@
     var Posts = {
       all: all,
       create: create,
+      update: update,
       get: get,
       getColumns: getColumns,
       setColumns: setColumns
@@ -69,6 +70,23 @@
         },
         transformRequest : angular.identity
        });
+    }
+    /**
+    * @name create
+    * @desc Create a new Post
+    * @param {string} content The content of the new Post
+    * @returns {Promise}
+    * @memberOf lostitems.posts.services.Posts
+    */
+    function update(item) {
+      return $http.put('/api/v1/posts/' + item.id + '/', angular.toJson(item));/*
+      return $http.put('/api/v1/posts/' + item.id + '/', angular.toJson(item),{
+        withCredentials : false,
+        headers : {
+        'Content-Type' : undefined
+        },
+        transformRequest : angular.identity
+       });*/
     }
 
     /**

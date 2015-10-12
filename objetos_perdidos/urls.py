@@ -5,6 +5,7 @@ from authentication.views import AccountViewSet, LoginView, LogoutView
 from django.contrib import admin
 from posts.views import AccountPostsViewSet, PostViewSet
 from django.conf import settings
+from django.core.cache import cache
 
 router = routers.SimpleRouter()
 router.register(r'accounts', AccountViewSet)
@@ -34,3 +35,6 @@ urlpatterns = patterns(
     url('^.*$', IndexView.as_view(), name='index'),
     #url('^/*$', IndexView.as_view(), name='index'),
 )
+
+
+cache.clear()

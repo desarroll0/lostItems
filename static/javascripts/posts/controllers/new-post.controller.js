@@ -32,11 +32,12 @@
           console.log(itemform.datafile);
           return;
         }
-      }
+      };
       //console.log(vm.item);
       //return;
       $scope.closeThisDialog();
-      
+      //console.log(vm.item.file);
+      //return;
       Upload.upload({
                 url: '/api/v1/posts/',
                 //data: {file: vm.datafile, content: vm.content}
@@ -80,13 +81,13 @@
       * @desc Propogate error event and show snackbar with error message
       */
       function createPostErrorFn(data, status, headers, config) {
-      $rootScope.$broadcast('post.created', {
+      /*$rootScope.$broadcast('post.created', {
         content: vm.content,
         datafile: vm.datafile,
         author: {
           username: Authentication.getAuthenticatedAccount().username
         }
-      });
+      });*/
 
       $scope.closeThisDialog();
       

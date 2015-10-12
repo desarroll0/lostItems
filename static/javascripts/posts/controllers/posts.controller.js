@@ -9,12 +9,12 @@
     .module('lostitems.posts.controllers')
     .controller('PostsController', PostsController);
 
-  PostsController.$inject = ['$scope', 'Posts', 'Authentication'];
+  PostsController.$inject = ['$scope', 'Posts', 'Authentication', 'ngDialog', '$controller'];
 
   /**
   * @namespace PostsController
   */
-  function PostsController($scope, Posts, Authentication) {
+  function PostsController($scope, Posts, Authentication, ngDialog, $controller) {
     var vm = this;
 
     vm.columns = [];
@@ -23,18 +23,19 @@
 
     vm.auth = Authentication.isAuthenticated();
 
-    vm.recover = recover;
 
-    vm.modalRecover = function(){
-     var modalInstance = $modal.open({
+    vm.modalRecover = function(post){
+     var modalInstance = ngDialog.open({
         templateUrl: '/static/templates/posts/regist_recovered_post.html',
-        controller: 'RecoverPostController',
-        resolve: {
-           post: function () {
-             return 12312;
-           }
-         }
+        scope: $scope,
+        controller: $controller('RecoverPostController as vm', {$scope: $scope,post: post})
       });
+     
+      ngDialog.close();
+      //$scope.closeThisDialog();
+/*
+      $scope.$watchCollection(function () { return $scope.posts; }, render);
+      $scope.$watch(function () { return $(window).width(); }, render);*/
     };
 
 

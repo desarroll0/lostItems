@@ -38,9 +38,7 @@ class AccountViewSet(viewsets.ModelViewSet):
         }, status=status.HTTP_400_BAD_REQUEST)
 
     def perform_update(self, serializer):
-        print(self.request.data)
         instance = serializer.save(account=self.request.data)
-        print('perform_update: '+str(instance.is_active))
         return super(AccountViewSet, self).perform_create(serializer)
 
 class LoginView(views.APIView):

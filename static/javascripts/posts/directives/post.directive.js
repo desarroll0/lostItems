@@ -19,6 +19,8 @@
     * @memberOf lostitems.posts.directives.Post
     */
     var directive = {
+      controller: 'PostsController',
+      controllerAs: 'vm',
       restrict: 'E',
       scope: {
         post: '=',

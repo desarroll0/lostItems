@@ -13,12 +13,12 @@ from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.order_by('-created_at')
     serializer_class = PostSerializer
-    parser_classes = (FileUploadParser, )# MultiPartParser, FormParser,)
+    #parser_classes = (FormParser, )#FormParser, MultiPartParser, )# MultiPartParser FileUploadParser, FormParser,)
 
     def get_permissions(self):
         if self.request.method in permissions.SAFE_METHODS:
             return (permissions.AllowAny(),)
-        return (permissions.IsAuthenticated(), IsAuthorOfPost(),)
+        return (permissions.IsAuthenticated(), )
 
     def perform_create(self, serializer):
         instance = serializer.save(author=self.request.user, datafile =self.request.data.get('datafile'))
@@ -27,7 +27,6 @@ class PostViewSet(viewsets.ModelViewSet):
     def list(self, request):
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data)
-
 
 
 class AccountPostsViewSet(viewsets.ViewSet):

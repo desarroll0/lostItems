@@ -25,6 +25,7 @@
       scope: {
         posts: '=',
         auth: '=',
+        modalRecover: '=',
       },
       templateUrl: '/static/templates/posts/posts_.html'
     };
