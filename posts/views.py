@@ -8,6 +8,7 @@ from posts.models import Post
 from posts.permissions import IsAuthorOfPost
 from posts.serializers import PostSerializer
 from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
+from rest_framework import generics
 
 
 class PostViewSet(viewsets.ModelViewSet):
@@ -25,8 +26,24 @@ class PostViewSet(viewsets.ModelViewSet):
         return super(PostViewSet, self).perform_create(serializer)
 
     def list(self, request):
+        print(request.data)
         serializer = self.serializer_class(self.queryset, many=True)
         return Response(serializer.data)
+
+class PostsList(generics.ListAPIView):
+    serializer_class = PostSerializer
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the purchases for
+        the user as determined by the username portion of the URL.
+        """
+        print(self.kwargs['recovered'])
+        if self.kwargs['recovered'] == 'si' : recovered = True
+        else:
+            recovered = False
+        #recovered = (self.kwargs['recovered'] == 'si') ? True : False
+        return Post.objects.filter(recovered=recovered)
 
 
 class AccountPostsViewSet(viewsets.ViewSet):

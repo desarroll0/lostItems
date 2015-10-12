@@ -24,29 +24,19 @@
       console.log(post);
       var item = {};
       item.id = post.id;
-      item.recovered = false;
-      //item.file = "";
-      /*
-      Upload.upload({
-                url: '/api/v1/posts/'+item.id+'/',
-                method: 'PUT',
-                //data: {file: vm.datafile, content: vm.content}
-                data: item
-            }).then(createPostSuccessFn,createPostErrorFn, 
-            function (evt) {
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + (evt.config.data.file ? evt.config.data.file.name : 'sin adjunto' ));
-            });
-*/
+      item.recovered = true;
+      item.recovered_by = vm.item.recovered_by;
+      item.recovered_contact = vm.item.recovered_contact;
+
       Posts.update(item).then(createPostSuccessFn,createPostErrorFn);
 
-              /**
+      /**
       * @name createPostSuccessFn
       * @desc Show snackbar with success message
       */
       function createPostSuccessFn(data, status, headers, config) {
         console.log(data);
-        $rootScope.$broadcast('post.created', data.data);
+        $rootScope.$broadcast('post.eliminated', data.data);
 
         regist_recovered.$setPristine();
         regist_recovered.$setValidity();

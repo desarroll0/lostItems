@@ -19,6 +19,7 @@
     var columns;
     var Posts = {
       all: all,
+      entregados: entregados,
       create: create,
       update: update,
       get: get,
@@ -37,7 +38,16 @@
     * @memberOf lostitems.posts.services.Posts
     */
     function all() {
-      return $http.get('/api/v1/posts/');
+      return $http.get('/api/v1/post/recovered/no/');
+    }
+    /**
+    * @name all
+    * @desc Get entregados Posts
+    * @returns {Promise}
+    * @memberOf lostitems.posts.services.Posts
+    */
+    function entregados() {
+      return $http.get('/api/v1/post/recovered/si/');
     }
 
 

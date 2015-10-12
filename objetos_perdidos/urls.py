@@ -3,7 +3,7 @@ from objetos_perdidos.views import IndexView
 from rest_framework_nested import routers
 from authentication.views import AccountViewSet, LoginView, LogoutView
 from django.contrib import admin
-from posts.views import AccountPostsViewSet, PostViewSet
+from posts.views import AccountPostsViewSet, PostViewSet, PostsList
 from django.conf import settings
 from django.core.cache import cache
 
@@ -28,6 +28,7 @@ urlpatterns = patterns(
 
   	url(r'^api/v1/', include(router.urls)),
   	url(r'^api/v1/', include(accounts_router.urls)),
+    url(r'^api/v1/post/recovered/(?P<recovered>.+)/$', PostsList.as_view()),
 
     #mediafiles
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),
