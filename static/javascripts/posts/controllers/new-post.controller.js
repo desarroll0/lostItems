@@ -25,8 +25,8 @@
     * @memberOf lostitems.posts.controllers.NewPostController
     */
     function submit(itemform) {
-      if(itemform.datafile.$ngfValidations){
-        if (itemform.$valid && vm.item.datafile ) {
+      if(itemform.datafile.$ngfValidations.length != 0){
+        if (itemform.$valid && vm.item.datafile != undefined ) {
         }
         else{ 
           console.log(itemform.datafile);
